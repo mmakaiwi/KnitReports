@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml"$if(lang)$ lang="$lang$" xml:lang="$lang$"$endif$>
+<html $if(lang)$ lang="$lang$" xml:lang="$lang$"$endif$>
 
 <head>
 
@@ -23,14 +22,18 @@ $header-includes$
 $endfor$
 
 $if(mmhighlight-js)$
-<link rel="stylesheet" href="$mmhighlight-css$" $if(html5)$$else$type="text/css" $endif$/>
+<link rel="stylesheet" href="$mmhighlight-css$" />
 <script src="$mmhighlight-js$"></script>
 <script src="$mmhighlight-rjs$"></script>
 $endif$
 
 $for(css)$
-<link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>
+<link rel="stylesheet" href="$css$" />
 $endfor$
+
+$if(mathjax)$
+<script src="$mathjax$"></script>
+$endif$
 
 </head>
 
@@ -43,6 +46,7 @@ $if(theme)$
   margin-left: auto;
   margin-right: auto;
   counter-reset: listing;
+  counter-reset: figure;
 }
 
 code, pre, pre code {
@@ -57,6 +61,21 @@ code, pre, pre code {
 code.hljs {
   border:1px solid #333;
   border-radius:5px;
+}
+
+div.figure{
+  text-align:center;
+  max-width:100%;
+}
+div.figure p.caption{
+  font-style:italic;
+  font-size:.9em;
+
+}
+div.figure p.caption:before{
+  counter-increment: figure;
+  content: "Figure " counter(figure) ": ";
+  cursor:default;
 }
 
 figure.listing{
@@ -76,6 +95,7 @@ figure.listing figcaption{
 figure.listing figcaption:before{
   counter-increment: listing;
   content: "Listing " counter(listing) ": ";
+  cursor:default;
 }
 </style>
 <div class="container-fluid main-container">

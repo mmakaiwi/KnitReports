@@ -1,5 +1,9 @@
 ---
 output: html_document
-  highlight:idea
+  toc: true
+  include
 ---
 
+```{r, echo=FALSE}
+knitr::opts_chunk$get(dev='svg')
+```
