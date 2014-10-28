@@ -10,6 +10,13 @@ include_script <- function(src, language="", caption=""){
                              '```'), collapse="\n"))
 }
 
+pdf_report <- function(...){
+  if(!require(printr)){
+    warning("Automatic table creation not enabled. See https://github.com/yihui/printr for install info.")
+  }
+  rmarkdown::pdf_document(...)
+}
+
 html_report <- function(highlight= TRUE, mathjax = "default", ...) {
 
   panArgs = c()
