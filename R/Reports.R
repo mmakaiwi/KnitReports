@@ -1,4 +1,4 @@
-
+#' @export
 include_script <- function(src, language="", caption=""){
   if (language != "") langstring = sprintf(".%s", language) else lanstring = ""
   if (caption != "") capstring = sprintf('htmlcap="%s"', caption) else capstring = ""
@@ -9,7 +9,7 @@ include_script <- function(src, language="", caption=""){
                              readLines(src),
                              '```'), collapse="\n"))
 }
-
+#' @export
 pdf_report <- function(...){
   if(!require(printr)){
     warning("Automatic table creation not enabled. See https://github.com/yihui/printr for install info.")
@@ -17,6 +17,14 @@ pdf_report <- function(...){
   rmarkdown::pdf_document(...)
 }
 
+word_report <- function(...){
+  if(!require(printr)){
+    warning("Automatic table creation not enabled. See https://github.com/yihui/printr for install info.")
+  }
+  rmarkdown::word_document(...)
+}
+
+#' @export
 html_report <- function(highlight= TRUE, mathjax = "default", ...) {
 
   panArgs = c()
@@ -50,7 +58,7 @@ html_report <- function(highlight= TRUE, mathjax = "default", ...) {
   if(mathjax == "default"){
     panArgs <- c(panArgs,
                  "--variable", "mathjax=http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML")
-  } else if(mathjax != null && mathjax != ""){
+  } else if(!is.null(mathjax) && mathjax != ""){
     panArgs <- c(panArgs,
                  "--variable", paste("mathjax=",mathjax,sep=""))
   }
@@ -72,14 +80,14 @@ html_report <- function(highlight= TRUE, mathjax = "default", ...) {
   })
 
   # call the base html_document function
-  html_document(highlight= NULL,
-                template = template_path,
-                fig_width = 6.5,
-                pandoc_args = panArgs,
-                fig_height = 4, ...)
+  rmarkdown::html_document(highlight= NULL,
+                        template = template_path,
+                        fig_width = 6.5,
+                        pandoc_args = panArgs,
+                        fig_height = 4, ...)
 }
-
-addImage <- function(default, alt="", sameLine=TRUE, ...){
+#' @export
+add_image <- function(default, alt="", sameLine=TRUE, ...){
   if(interactive())
     toFormat <- "interactive"
   else
