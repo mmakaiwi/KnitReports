@@ -25,7 +25,7 @@ word_report <- function(...){
 }
 
 #' @export
-html_report <- function(highlight= TRUE, mathjax = "default", ...) {
+html_report <- function(highlight= TRUE, mathjax = "default", fig_width = 6.5, fig_height=4, fig_device='svg', ...) {
 
   panArgs = c()
 
@@ -82,9 +82,10 @@ html_report <- function(highlight= TRUE, mathjax = "default", ...) {
   # call the base html_document function
   rmarkdown::html_document(highlight= NULL,
                         template = template_path,
-                        fig_width = 6.5,
+                        fig_width = fig_width,
+                        fig_device = fig_device,
                         pandoc_args = panArgs,
-                        fig_height = 4, ...)
+                        fig_height = fig_height, ...)
 }
 #' @export
 add_image <- function(default, alt="", sameLine=TRUE, ...){
