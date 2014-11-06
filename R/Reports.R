@@ -89,12 +89,13 @@ html_report <- function(highlight= TRUE, mathjax = "default", fig_width = 6.5, f
 }
 #' @export
 add_image <- function(default, alt="", sameLine=TRUE, ...){
-  if(interactive())
+  if(is.null(knitr::opts_knit$get("rmarkdown.pandoc.to")))
     toFormat <- "interactive"
   else
     toFormat <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 
   overrides <- list(...)
+
 
   if (length(overrides) > 0 && exists(toFormat,overrides)){
     file <- overrides[toFormat]
